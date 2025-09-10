@@ -23,3 +23,28 @@ function renderSearchBar() {
         </form>
     `;
 }
+
+
+function renderPokemonCard() {
+    return `
+        <article
+            class="pokemon-card type-${pokemon.types[0].type.name}"
+            tabindex ="0"
+            role="button"
+            aria-label= "View details for ${pokemon.name}">
+
+            <img
+                src="${pokemon.sprites.front_default}"
+                alt="Image of ${pokemon.name}"
+                class="pokemon-img>
+
+            <h2 class=""pokemon-name">${pokemon.name.toUpperCase()}</h2>
+
+            <p class="pokemon-id>#${pokemon.id}</p>
+
+            <div class="pokemon-types">
+                ${pokemon.types.map(t => `<span class="type ${t.type.name}">${t.type.name}</span>`).join('')}
+            </div>
+        </article>
+    `;
+}
