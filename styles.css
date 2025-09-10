@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: grey;
+}
+
+.container {
+    max-width: 1920px;     
+    margin: 0 auto;        
+    padding: 0 20px;      
+    display: flex;
+    flex-direction: column;
+}
+
+header#headerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    background-color: #f5f5f5; 
+    z-index: 10; 
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+header .logo img {
+    width: 50px;
+    height: 50px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.search-bar {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.pokedex {
+    max-width: 1920px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 20px;
+}
+
+.pokemon-card.type-normal { background-color: #A8A77A; }
+.pokemon-card.type-fire { background-color: #EE8130; }
+.pokemon-card.type-water { background-color: #6390F0; }
+.pokemon-card.type-electric { background-color: #F7D02C; }
+.pokemon-card.type-grass { background-color: #7AC74C; }
+.pokemon-card.type-ice { background-color: #96D9D6; }
+.pokemon-card.type-fighting { background-color: #C22E28; }
+.pokemon-card.type-poison { background-color: #A33EA1; }
+.pokemon-card.type-ground { background-color: #E2BF65; }
+.pokemon-card.type-flying { background-color: #A98FF3; }
+.pokemon-card.type-psychic { background-color: #F95587; }
+.pokemon-card.type-bug { background-color: #A6B91A; }
+.pokemon-card.type-rock { background-color: #B6A136; }
+.pokemon-card.type-ghost { background-color: #735797; }
+.pokemon-card.type-dragon { background-color: #6F35FC; }
+.pokemon-card.type-dark { background-color: #705746; }
+.pokemon-card.type-steel { background-color: #B7B7CE; }
+.pokemon-card.type-fairy { background-color: #D685AD; }
+
+.pokemon-card {
+    border-radius: 24px;
+    padding: 12px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pokemon-card:hover,
+.pokemon-card:focus {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+
+.pokemon-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 8px 0 4px 0;
+}
+
+.pokemon-id {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
