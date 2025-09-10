@@ -25,7 +25,7 @@ function renderSearchBar() {
 }
 
 
-function renderPokemonCard() {
+function renderPokemonCard(pokemon) {
     return `
         <article
             class="pokemon-card type-${pokemon.types[0].type.name}"
