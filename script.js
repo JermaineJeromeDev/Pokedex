@@ -1,0 +1,1 @@
+document.getElementById("headerContainer").innerHTML = renderHeader();
