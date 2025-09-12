@@ -1,9 +1,10 @@
 const pokedex = document.getElementById("pokedex");
 const loadMoreContainer = document.getElementById("loadMoreContainer");
 
-let startId = 1;        
-let limit = 40;         
-const maxPokemon = 151; 
+
+let startId = 1;
+let limit = 40;
+const maxPokemon = 151;
 
 
 async function loadPokemon(id) {
@@ -43,25 +44,14 @@ async function fetchPokemon(id) {
 
 function showOverlay(pokemon) {
     const overlayContainer = document.getElementById('overlayContainer');
-    overlayContainer.innerHTML = renderOverlay(pokemon);
-    const overlay = document.getElementById('overlayContainer');
-    setupOverlayClose(overlay);
-    setupTabs(overlay);
-}
-
-
-function setupOverlayClose(overlay) {
-    overlay.addEventListener('click', (e) => {
-        if (e.target.id === 'overlayContainer') {
-            overlay.innerHTML = '';
-        }
+    overlayContainer.innerHTML = renderOverlay(pokemon); 
+    const overlay = overlayContainer.querySelector('.overlay');
+    const content = overlay.querySelector('.overlay-content'); 
+    overlay.addEventListener('click', e => {
+        if (e.target === overlay) overlayContainer.innerHTML = '';
     });
-}
-
-
-function setupTabs(overlay) {
     const tabButtons = overlay.querySelectorAll('.tab-btn');
-    const tabContents = overlay.querySelectorAll('tab-content');
+    const tabContents = overlay.querySelectorAll('.tab-content');
     tabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             tabButtons.forEach(b => b.classList.remove('active'));
@@ -73,9 +63,10 @@ function setupTabs(overlay) {
 }
 
 
-pokedex.addEventListener('click', async (e) => {
-    const card = e.target.closet('.pokemon-card');
+pokedex.addEventListener('click', async e => {
+    const card = e.target.closest('.pokemon-card');
     if (!card) return;
+
     const pokemonId = card.dataset.id;
     const data = await fetchPokemon(pokemonId);
     showOverlay(data);
