@@ -30,6 +30,58 @@ async function loadBatch() {
 }
 
 
+async function fetchPokemon(id) {
+    try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        if (!res.ok) throw new Error(`Failed to fetch Pokémon ${id}`);
+        return await res.json();
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+
+function showOverlay(pokemon) {
+    const overlayContainer = document.getElementById('overlayContainer');
+    overlayContainer.innerHTML = renderOverlay(pokemon);
+    const overlay = document.getElementById('overlayContainer');
+    setupOverlayClose(overlay);
+    setupTabs(overlay);
+}
+
+
+function setupOverlayClose(overlay) {
+    overlay.addEventListener('click', (e) => {
+        if (e.target.id === 'overlayContainer') {
+            overlay.innerHTML = '';
+        }
+    });
+}
+
+
+function setupTabs(overlay) {
+    const tabButtons = overlay.querySelectorAll('.tab-btn');
+    const tabContents = overlay.querySelectorAll('tab-content');
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabButtons.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.add('hidden'));
+            btn.classList.add('active');
+            overlay.querySelector(`#tab-${btn.dataset.tab}`).classList.remove('hidden');
+        });
+    });
+}
+
+
+pokedex.addEventListener('click', async (e) => {
+    const card = e.target.closet('.pokemon-card');
+    if (!card) return;
+    const pokemonId = card.dataset.id;
+    const data = await fetchPokemon(pokemonId);
+    showOverlay(data);
+});
+
+
 loadMoreContainer.innerHTML = `<button id="loadMoreBtn">Load More</button>`;
 document.getElementById("loadMoreBtn").addEventListener("click", loadBatch);
 
