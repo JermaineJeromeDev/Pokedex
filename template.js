@@ -29,30 +29,36 @@ function renderPokemonCard(pokemon) {
     return `
         <article
             class="pokemon-card type-${pokemon.types[0].type.name}"
-            tabindex ="0"
+            data-id="${pokemon.id}"
+            tabindex="0"
             role="button"
-            aria-label= "View details for ${pokemon.name}">
+            aria-label="View details for ${pokemon.name}">
+            
             <img
                 src="${pokemon.sprites.front_default}"
                 alt="Image of ${pokemon.name}"
-                class="pokemon-img>
-            <h2 class=""pokemon-name">${pokemon.name.toUpperCase()}</h2>
-            <p class="pokemon-id>#${pokemon.id}</p>
+                class="pokemon-img">
+            
+            <h2 class="pokemon-name">${pokemon.name.toUpperCase()}</h2>
+            
+            <p class="pokemon-id">#${pokemon.id}</p>
+            
             <div class="pokemon-types">
                 ${pokemon.types.map(t => `<span class="type ${t.type.name}">${t.type.name}</span>`).join('')}
             </div>
+            
             <div class="meta">
                 <p><strong>Height:</strong> ${pokemon.height / 10} m</p>
                 <p><strong>Weight:</strong> ${pokemon.weight / 10} kg</p>
             </div>
+            
             <div class="pokemon-stats">
-                <p><strong>HP:</strong> ${pokemon.stats[0].base_start}</p>
-                <p><strong>HP:</strong> ${pokemon.stats[1].base_start}</p>
-                <p><strong>HP:</strong> ${pokemon.stats[2].base_start}</p>
+                ${pokemon.stats.map(s => `<p><strong>${s.stat.name.toUpperCase()}:</strong> ${s.base_stat}</p>`).join('')}
             </div>
         </article>
     `;
 }
+
 
 
 function renderOverlay(pokemon) {
