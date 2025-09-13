@@ -1,7 +1,10 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     background-color: whitesmoke;
     font-family: Arial, sans-serif;
     
@@ -146,7 +149,6 @@ header h1 {
 
 .overlay-content {
     background-color: transparent;
-    padding: 1.5rem;
     border-radius: 20px;
     max-width: 500px;
     width: 90%;
@@ -162,17 +164,19 @@ header h1 {
 }
 
 .pokemon-large-card {
-    padding: 30px; 
+    padding: 30px;
     border-radius: 16px;
-    color: #111; 
+    color: #111;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 100%;
-    max-width: 500px; 
+    width: auto;
+    max-width: 550px;
+    min-height: 650px; 
     box-sizing: border-box;
     position: relative;
+    background-color: rgba(255,255,255,0.9);
 }
 
 .pokemon-large-card .pokemon-img {
@@ -186,6 +190,10 @@ header h1 {
 
 .pokemon-large-card:hover .pokemon-img {
     transform: scale(1.05);
+}
+
+.pokemon-large-card > .pokemon-tabs {
+    flex-shrink: 0; 
 }
 
 .pokemon-large-card .pokemon-name {
@@ -246,12 +254,15 @@ header h1 {
     width: 100%;
     text-align: left;
     margin-top: 12px;
+    flex-grow: 1;
+    overflow-y: auto;
 }
 
 .pokemon-large-card .tab-content p {
     margin: 6px 0;
     font-size: 1rem;
     color: #111;
+    font-weight: 500;
 }
 
 .tab-content.hidden {
@@ -371,4 +382,6 @@ header h1 {
     0% { transform: rotate(0deg);}
     100% { transform: rotate(360deg);}
 }
-.hidden { display: none; }
+.hidden { 
+    display: none; 
+}
