@@ -161,25 +161,25 @@ header h1 {
 }
 
 .pokemon-large-card {
-    padding: 20px;
+    padding: 30px; 
     border-radius: 16px;
-    background-color: inherit;
-    color: #fff;
+    color: #111; 
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     width: 100%;
+    max-width: 500px; 
     box-sizing: border-box;
     position: relative;
 }
 
 .pokemon-large-card .pokemon-img {
-    width: 150px;
-    height: 150px;
+    width: 200px; 
+    height: 200px;
     object-fit: contain;
-    margin-bottom: 12px;
-    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    margin-bottom: 16px;
+    filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
     transition: transform 0.3s ease;
 }
 
@@ -188,16 +188,17 @@ header h1 {
 }
 
 .pokemon-large-card .pokemon-name {
-    font-size: 1.8rem;
+    font-size: 2rem;  
     font-weight: bold;
-    margin: 8px 0 4px 0;
+    margin: 12px 0 4px 0;
     text-transform: uppercase;
 }
 
 .pokemon-large-card .pokemon-id {
-    font-size: 1rem;
-    margin-bottom: 8px;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
     opacity: 0.8;
+    color: #333;
 }
 
 .pokemon-large-card .pokemon-types {
@@ -224,19 +225,19 @@ header h1 {
 }
 
 .pokemon-large-card .tab-btn {
-    padding: 6px 14px;
-    border-radius: 10px;
+    padding: 8px 16px; 
+    border-radius: 12px;
     border: none;
     cursor: pointer;
     font-weight: bold;
-    background-color: rgba(255,255,255,0.2);
-    color: #fff;
+    background-color: rgba(0,0,0,0.1); 
+    color: #111; 
     transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .pokemon-large-card .tab-btn.active,
 .pokemon-large-card .tab-btn:hover {
-    background-color: rgba(255,255,255,0.8);
+    background-color: rgba(0,0,0,0.2);
     color: #000;
 }
 
@@ -247,8 +248,9 @@ header h1 {
 }
 
 .pokemon-large-card .tab-content p {
-    margin: 4px 0;
-    font-size: 0.9rem;
+    margin: 6px 0;
+    font-size: 1rem;
+    color: #111;
 }
 
 .tab-content.hidden {
