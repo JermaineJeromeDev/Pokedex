@@ -117,7 +117,6 @@ function finishLoading(btn, startTime) {
     }, Math.max(0, 1000 - elapsed));
 }
 
-
 function checkMaxPokemon(btn) {
     if (startId > maxPokemon) btn.style.display = "none";
 }
@@ -240,19 +239,6 @@ function setupOverlayNavigation(overlay) {
         currentIndex = (currentIndex + 1) % allPokemon.length;
         showOverlayByIndex(currentIndex);
     });
-    document.addEventListener('keydown', handleArrowKeys);
-}
-
-
-function handleArrowKeys(e) {
-    if (!document.querySelector('.overlay')) return;
-    if (e.key === 'ArrowLeft') {
-        currentIndex = (currentIndex - 1 + allPokemon.length) % allPokemon.length;
-        showOverlayByIndex(currentIndex);
-    } else if (e.key === 'ArrowRight') {
-        currentIndex = (currentIndex + 1) % allPokemon.length;
-        showOverlayByIndex(currentIndex);
-    }
 }
 
 
