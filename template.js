@@ -8,7 +8,6 @@ function renderHeader() {
     `;
 }
 
-
 function renderSearchBar() {
     return `
         <form class="search-bar" role="search" aria-label="Pokémon search">
@@ -24,7 +23,6 @@ function renderSearchBar() {
     `;
 }
 
-
 function renderPokemonCard(pokemon) {
     return `
         <article
@@ -33,22 +31,17 @@ function renderPokemonCard(pokemon) {
             tabindex="0"
             role="button"
             aria-label="View details for ${pokemon.name}">
-            
             <img src="${pokemon.sprite}" alt="Image of ${pokemon.name}" class="pokemon-img">
-            
             <h2 class="pokemon-name">${pokemon.name.toUpperCase()}</h2>
-            
             <div class="pokemon-types">
                 ${pokemon.types.map(t => `<span class="type ${t}">${t}</span>`).join('')}
             </div>
-
             <div class="pokemon-mini-stats">
                 HP: ${pokemon.hp} | ATK: ${pokemon.atk} | DEF: ${pokemon.def}
             </div>
         </article>
     `;
 }
-
 
 function renderOverlay(pokemon) {
     return `
@@ -75,10 +68,17 @@ function renderOverlay(pokemon) {
                         ${pokemon.moves.slice(0, 5).map(m => `<p>${m.move.name}</p>`).join('')}
                     </div>
                 </article>
-                <!-- Navigation Arrows -->
                 <div class="nav-arrow left">&#10094;</div>
                 <div class="nav-arrow right">&#10095;</div>
             </div>
+        </div>
+    `;
+}
+
+function renderLoadingOverlay() {
+    return `
+        <div id="loadingOverlay" class="hidden">
+            <img src="assets/img/pokeball.png" alt="Loading..." class="spinner">
         </div>
     `;
 }
