@@ -1,3 +1,5 @@
+const body = document.querySelector('body');
+const loadingOverlay = document.getElementById('loadingOverlay');
 const headerContainer = document.getElementById('headerContainer');
 headerContainer.innerHTML = renderHeader();
 const pokedex = document.getElementById("pokedex");
@@ -7,8 +9,18 @@ const searchBtn = headerContainer.querySelector('button');
 searchBtn.disabled = true;
 
 
+let startId = 1;
+const limit = 40;
+const maxPokemon = 151;
+let allPokemon = [];
+let currentIndex = 0; 
+
+
 searchInput.addEventListener('input', () => {
-    searchBtn.disabled = searchInput.value.trim().length < 3;
+    searchBtn.disabled = searchInput.value.trim().length < 3 && searchInput.value.trim().length !== 0;
+    if (searchInput.value.trim() === '') {
+        renderAllPokemon();
+    }
 });
 
 
@@ -26,14 +38,8 @@ headerContainer.querySelector('form').addEventListener('submit', async e => {
         .filter(p => p.name.toLowerCase().includes(query))
         .map(prepareCardData);
     pokedex.innerHTML = filtered.map(renderPokemonCard).join('');
+    setupPokemonCardClick();
 });
-
-
-let startId = 1;
-const limit = 40;
-const maxPokemon = 151;
-let allPokemon = [];
-let currentIndex = 0; 
 
 
 function prepareCardData(pokemon) {
@@ -70,18 +76,107 @@ async function loadPokemon(id) {
     const cardData = prepareCardData(data);
     allPokemon.push(data); 
     pokedex.innerHTML += renderPokemonCard(cardData);
+    setupPokemonCardClick();
 }
 
 
 async function loadBatch() {
-    const endId = Math.min(startId + limit - 1, maxPokemon);
-    for (let i = startId; i <= endId; i++) {
-        await loadPokemon(i);
+    const btn = document.getElementById("loadMoreBtn");
+    const start = Date.now();
+    startLoading(btn);
+    try {
+        await fetchAndRenderNextBatch();
+        checkMaxPokemon(btn);
+    } catch (e) {
+        console.error(e);
+    } finally {
+        finishLoading(btn, start);
     }
+}
+
+
+function startLoading(btn) {
+    btn.disabled = true;
+    showLoading();
+}
+
+
+function renderSinglePokemon(p) {
+    if (!p || allPokemon.some(a => a.id === p.id)) return;
+    allPokemon.push(p);
+    pokedex.innerHTML += renderPokemonCard(prepareCardData(p));
+    setupPokemonCardClick();
+}
+
+
+function finishLoading(btn, startTime) {
+    const elapsed = Date.now() - startTime;
+    setTimeout(() => {
+        btn.disabled = false;
+        hideLoading();
+    }, Math.max(0, 1000 - elapsed));
+}
+
+
+function checkMaxPokemon(btn) {
+    if (startId > maxPokemon) btn.style.display = "none";
+}
+
+
+async function fetchAndRenderNextBatch() {
+    const ids = getIdsToLoad(startId, limit, maxPokemon);
+    if (!ids.length) return;
+    const batch = await fetchPokemonBatch(ids);
+    batch.forEach(p => renderSinglePokemon(p));
     startId += limit;
-    if (startId > maxPokemon) {
-        document.getElementById("loadMoreBtn").style.display = "none";
+}
+
+
+function showLoading() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.classList.remove('hidden');
+    overlay.style.display = 'flex';
+}
+
+
+function hideLoading() {
+    const overlay = document.getElementById('loadingOverlay');
+    overlay.classList.add('hidden');
+    overlay.style.display = 'none';
+}
+
+
+function getIdsToLoad(start, limit, max) {
+    const endId = Math.min(start + limit - 1, max);
+    const ids = [];
+    for (let i = start; i <= endId; i++) {
+        if (!allPokemon.some(p => p.id === i)) ids.push(i);
     }
+    return ids;
+}
+
+
+async function fetchPokemonBatch(ids) {
+    const fetches = ids.map(id => fetchPokemon(id));
+    return await Promise.all(fetches); 
+}
+
+
+function setupPokemonCardClick() {
+    pokedex.querySelectorAll('.pokemon-card').forEach(card => {
+        card.addEventListener('click', e => {
+            const pokemonId = card.dataset.id;
+            const data = allPokemon.find(p => p.id == pokemonId);
+            if (!data) return;
+            showOverlay(data);
+        });
+    });
+}
+
+
+function renderAllPokemon() {
+    pokedex.innerHTML = allPokemon.map(p => renderPokemonCard(prepareCardData(p))).join('');
+    setupPokemonCardClick();
 }
 
 
@@ -159,15 +254,6 @@ function handleArrowKeys(e) {
         showOverlayByIndex(currentIndex);
     }
 }
-
-
-pokedex.addEventListener('click', async e => {
-    const card = e.target.closest('.pokemon-card');
-    if (!card) return;
-    const pokemonId = card.dataset.id;
-    const data = await fetchPokemon(pokemonId);
-    showOverlay(data);
-});
 
 
 loadMoreContainer.innerHTML = `<button id="loadMoreBtn">Load More</button>`;
