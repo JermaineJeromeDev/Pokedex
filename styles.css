@@ -352,3 +352,23 @@ header h1 {
 .overlay .nav-arrow.right {
     right: 10px;
 }
+
+#loadingOverlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.85);
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    z-index: 9999;
+}
+#loadingOverlay img {
+    width: 80px;
+    height: 80px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+.hidden { display: none; }
