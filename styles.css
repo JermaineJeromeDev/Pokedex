@@ -49,7 +49,7 @@ header h1 {
 
 .pokedex {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 16px;
     justify-items: center; 
     filter: drop-shadow(2px 4px 6px black);
@@ -57,20 +57,17 @@ header h1 {
 
 .pokemon-card {
     width: 100%;          
-    max-width: 160px;     
+    max-width: 180px;     
     border-radius: 16px;
     padding: 12px;
-
     color: black;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
-    
     flex-direction: column;
     align-items: center;
     text-align: center;
     box-sizing: border-box;
-
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
     background-clip: padding-box;
 }
@@ -91,13 +88,17 @@ header h1 {
     text-overflow: ellipsis;
 }
 
-.pokemon-img {
-    width: 96px;
-    height: 96px;
+.pokemon-card .pokemon-img {
+    width: 128px;   
+    height: 128px;  
     object-fit: contain;
     margin-bottom: 8px;
-
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    transition: transform 0.2s ease;
+}
+
+.pokemon-card:hover .pokemon-img {
+    transform: scale(1.05);
 }
 
 .pokemon-types {
@@ -293,3 +294,61 @@ header h1 {
 .pokemon-large-card.type-steel { background-color: #B7B7CE; }
 .pokemon-card.type-fairy,
 .pokemon-large-card.type-fairy { background-color: #D685AD; }
+
+#loadMoreBtn {
+    margin: 24px auto 40px auto;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background-color: #6390F0;
+
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.25s ease;
+    display: block;
+}
+
+#loadMoreBtn:hover,
+#loadMoreBtn:focus {
+    background-color: #4a7cd4;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    outline: none;
+}
+
+.overlay .nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 6px rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.3);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 10000;
+}
+
+.overlay .nav-arrow:hover {
+    transform: translateY(-50%) scale(1.1);
+    background-color: rgba(0,0,0,0.5);
+}
+
+.overlay .nav-arrow.left {
+    left: 10px;
+}
+
+.overlay .nav-arrow.right {
+    right: 10px;
+}
