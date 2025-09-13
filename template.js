@@ -50,7 +50,6 @@ function renderPokemonCard(pokemon) {
 }
 
 
-
 function renderOverlay(pokemon) {
     return `
         <div class="overlay">
@@ -58,29 +57,29 @@ function renderOverlay(pokemon) {
                 <article class="pokemon-large-card type-${pokemon.types[0].type.name}">
                     <h2 class="pokemon-name">${pokemon.name.toUpperCase()}</h2>
                     <p class="pokemon-id">#${pokemon.id}</p>
-                    <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}" class="pokemon-img">
-                    
+                    <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}" class="pokemon-img">    
                     <div class="pokemon-tabs">
                         <button class="tab-btn active" data-tab="stats">Stats</button>
                         <button class="tab-btn" data-tab="abilities">Abilities</button>
                         <button class="tab-btn" data-tab="moves">Moves</button>
-                    </div>
-                    
+                    </div>                
                     <div class="tab-content" id="tab-stats">
                         <p><strong>Height:</strong> ${pokemon.height / 10} m</p>
                         <p><strong>Weight:</strong> ${pokemon.weight / 10} kg</p>
                         ${pokemon.stats.map(s => `<p><strong>${s.stat.name.toUpperCase()}:</strong> ${s.base_stat}</p>`).join('')}
-                    </div>
-                    
+                    </div>                
                     <div class="tab-content hidden" id="tab-abilities">
                         ${pokemon.abilities.map(a => `<p>${a.ability.name}</p>`).join('')}
-                    </div>
-                    
+                    </div>               
                     <div class="tab-content hidden" id="tab-moves">
                         ${pokemon.moves.slice(0, 5).map(m => `<p>${m.move.name}</p>`).join('')}
                     </div>
                 </article>
+                <!-- Navigation Arrows -->
+                <div class="nav-arrow left">&#10094;</div>
+                <div class="nav-arrow right">&#10095;</div>
             </div>
         </div>
     `;
 }
+
