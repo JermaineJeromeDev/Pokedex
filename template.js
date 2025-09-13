@@ -26,7 +26,7 @@ function renderSearchBar() {
 function renderPokemonCard(pokemon) {
     return `
         <article
-            class="pokemon-card type-${pokemon.type}"
+            class="pokemon-card type-${pokemon.types[0]}"
             data-id="${pokemon.id}"
             tabindex="0"
             role="button"
@@ -74,12 +74,3 @@ function renderOverlay(pokemon) {
         </div>
     `;
 }
-
-function renderLoadingOverlay() {
-    return `
-        <div id="loadingOverlay" class="hidden">
-            <img src="assets/img/pokeball.png" alt="Loading..." class="spinner">
-        </div>
-    `;
-}
-
