@@ -7,12 +7,14 @@ const loadMoreContainer = document.getElementById("loadMoreContainer");
 const searchInput = document.getElementById('searchInput');
 const searchBtn = headerContainer.querySelector('button');
 searchBtn.disabled = true;
+const debouncedSearch = debounce((val) => performSearch(val), 250);
 const searchHint = document.getElementById('searchHint');
 searchHint.style.display = 'none';
-
-
+const footerContainer = document.getElementById('footerContainer');
+footerContainer.innerHTML = renderFooter().replace('YEAR', new Date().getFullYear());
 const burgerMenu = document.getElementById('burgerMenu');
 const navLinks = headerContainer.querySelector('.nav-links');
+
 
 burgerMenu.addEventListener('click', () => {
     navLinks.classList.toggle('active');
@@ -178,9 +180,6 @@ function handleSearchError(err) {
 }
 
 
-const debouncedSearch = debounce((val) => performSearch(val), 250);
-
-
 searchInput.addEventListener('input', (e) => {
     const val = e.target.value.trim();
     searchBtn.disabled = val.length < 3 && val.length !== 0;
@@ -195,7 +194,6 @@ searchInput.addEventListener('input', (e) => {
     }
     debouncedSearch(val);
 });
-
 
 
 headerContainer.querySelector('form').addEventListener('submit', async (e) => {
