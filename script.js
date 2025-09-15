@@ -7,6 +7,17 @@ const loadMoreContainer = document.getElementById("loadMoreContainer");
 const searchInput = document.getElementById('searchInput');
 const searchBtn = headerContainer.querySelector('button');
 searchBtn.disabled = true;
+const searchHint = document.getElementById('searchHint');
+searchHint.style.display = 'none';
+
+
+const burgerMenu = document.getElementById('burgerMenu');
+const navLinks = headerContainer.querySelector('.nav-links');
+
+burgerMenu.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    burgerMenu.classList.toggle('open');
+});
 
 
 let startId = 1;
@@ -173,6 +184,11 @@ const debouncedSearch = debounce((val) => performSearch(val), 250);
 searchInput.addEventListener('input', (e) => {
     const val = e.target.value.trim();
     searchBtn.disabled = val.length < 3 && val.length !== 0;
+    if (val.length > 0 && val.length < 3) {
+        searchHint.style.display = 'block';
+    } else {
+        searchHint.style.display = 'none';
+    }
     if (val === '') {
         renderAllPokemon();
         return;
@@ -181,17 +197,28 @@ searchInput.addEventListener('input', (e) => {
 });
 
 
+
 headerContainer.querySelector('form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const q = searchInput.value.trim().toLowerCase();
-    if (q.length < 3) return;
+    if (q.length < 3) {
+        searchHint.style.display = 'block';
+        searchInput.focus();
+        return;
+    }
+    searchHint.style.display = 'none';
     await performSearch(q);
 });
 
 
 searchBtn.addEventListener('click', async (e) => {
     const q = searchInput.value.trim().toLowerCase();
-    if (q.length < 3) return;
+    if (q.length < 3) {
+        searchHint.style.display = 'block';
+        searchInput.focus();
+        return;
+    }
+    searchHint.style.display = 'none';
     await performSearch(q);
 });
 
