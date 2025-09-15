@@ -31,13 +31,18 @@ function renderPokemonCard(pokemon) {
             tabindex="0"
             role="button"
             aria-label="View details for ${pokemon.name}">
-            <img src="${pokemon.sprite}" alt="Image of ${pokemon.name}" class="pokemon-img">
+            <div class="pokemon-img-wrapper">
+                <img src="assets/img/blackgrey.png" class="pokeball-bg small" alt="">
+                <img src="${pokemon.sprite}" alt="Image of ${pokemon.name}" class="pokemon-img">
+            </div>
             <h2 class="pokemon-name">${pokemon.name.toUpperCase()}</h2>
             <div class="pokemon-types">
                 ${pokemon.types.map(t => `<span class="type ${t}">${t}</span>`).join('')}
             </div>
             <div class="pokemon-mini-stats">
-                HP: ${pokemon.hp} | ATK: ${pokemon.atk} | DEF: ${pokemon.def}
+                <div class="stat-box">HP ${pokemon.hp}</div>
+                <div class="stat-box">ATK ${pokemon.atk}</div>
+                <div class="stat-box">DEF ${pokemon.def}</div>
             </div>
         </article>
     `;
@@ -49,23 +54,56 @@ function renderOverlay(pokemon) {
             <div class="overlay-content">
                 <article class="pokemon-large-card type-${pokemon.types[0].type.name}">
                     <h2 class="pokemon-name">${pokemon.name.toUpperCase()}</h2>
-                    <p class="pokemon-id">#${pokemon.id}</p>
-                    <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}" class="pokemon-img">    
-                    <div class="pokemon-tabs">
-                        <button class="tab-btn active" data-tab="stats">Stats</button>
-                        <button class="tab-btn" data-tab="abilities">Abilities</button>
-                        <button class="tab-btn" data-tab="moves">Moves</button>
-                    </div>                
-                    <div class="tab-content" id="tab-stats">
-                        <p><strong>Height:</strong> ${pokemon.height / 10} m</p>
-                        <p><strong>Weight:</strong> ${pokemon.weight / 10} kg</p>
-                        ${pokemon.stats.map(s => `<p><strong>${s.stat.name.toUpperCase()}:</strong> ${s.base_stat}</p>`).join('')}
-                    </div>                
-                    <div class="tab-content hidden" id="tab-abilities">
-                        ${pokemon.abilities.map(a => `<p>${a.ability.name}</p>`).join('')}
-                    </div>               
-                    <div class="tab-content hidden" id="tab-moves">
-                        ${pokemon.moves.slice(0, 5).map(m => `<p>${m.move.name}</p>`).join('')}
+                    <p class="pokemon-id">#${pokemon.id}</p>                
+                    <div class="pokemon-img-wrapper">
+                        <img src="assets/img/black.png" class="pokeball-bg large" alt="">
+                        <img src="${pokemon.sprites.front_default}" alt="Image of ${pokemon.name}" class="pokemon-img">
+                    </div>
+                    <div class="tab-container">
+                        <div class="pokemon-tabs">
+                            <button class="tab-btn active" data-tab="about">About</button>
+                            <button class="tab-btn" data-tab="stats">Base Stats</button>
+                            <button class="tab-btn" data-tab="evolution">Evolution</button>
+                            <button class="tab-btn" data-tab="moves">Moves</button>
+                        </div>
+
+                        <div class="tab-content" id="tab-about">
+                            <h3>About</h3>
+                            <p><strong>Species:</strong> ${pokemon.species.name}</p>
+                            <p><strong>Height:</strong> ${pokemon.height / 10} m</p>
+                            <p><strong>Weight:</strong> ${pokemon.weight / 10} kg</p>
+                            <p><strong>Abilities:</strong> 
+                                ${pokemon.abilities.map(a => a.ability.name).join(", ")}
+                            </p>
+                            <h4>Breading</h4>
+                            <p><strong>Gender:</strong> ♂ 50% / ♀ 50%</p>
+                            <p><strong>Egg Groups:</strong> Unknown</p>
+                            <p><strong>Egg Cycle:</strong> Unknown</p>
+                        </div>
+
+                        <div class="tab-content hidden" id="tab-stats">
+                            <h3>Base Stats</h3>
+                            ${pokemon.stats.map(s => `
+                                <div class="stat-row">
+                                    <span class="stat-name">${s.stat.name.toUpperCase()}</span>
+                                    <span class="stat-value">${s.base_stat}</span>
+                                    <div class="stat-bar">
+                                        <!-- width + color setzen wir per JS -->
+                                        <div class="stat-fill" data-value="${s.base_stat}"></div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+
+                        <div class="tab-content hidden" id="tab-evolution">
+                            <h3>Evolution</h3>
+                            <p>Evolution data will be loaded here.</p>
+                        </div>
+
+                        <div class="tab-content hidden" id="tab-moves">
+                            <h3>Moves</h3>
+                            ${pokemon.moves.slice(0, 10).map(m => `<p>${m.move.name}</p>`).join('')}
+                        </div>
                     </div>
                 </article>
                 <div class="nav-arrow left">&#10094;</div>
@@ -74,3 +112,16 @@ function renderOverlay(pokemon) {
         </div>
     `;
 }
+
+function renderStat(statName, value) {
+    return `
+        <div class="stat">
+            <div class="stat-name">${statName}</div>
+            <div class="stat-value">${value}</div>
+            <div class="stat-bar">
+                <div class="stat-fill" data-value="${value}"></div>
+            </div>
+        </div>
+    `;
+}
+
