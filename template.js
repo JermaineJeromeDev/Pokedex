@@ -63,7 +63,6 @@ function renderOverlay(pokemon) {
                         <div class="pokemon-tabs">
                             <button class="tab-btn active" data-tab="about">About</button>
                             <button class="tab-btn" data-tab="stats">Base Stats</button>
-                            <button class="tab-btn" data-tab="evolution">Evolution</button>
                             <button class="tab-btn" data-tab="moves">Moves</button>
                         </div>
                         <div class="tab-content" id="tab-about">
