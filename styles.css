@@ -33,6 +33,7 @@ header .logo {
     display: flex;
     align-items: center;
     gap: 12px;
+    filter: drop-shadow(2px 4px 8px black);
 }
 
 header .logo img {
@@ -49,6 +50,7 @@ header h1 {
     display: flex;
     gap: 8px;
     height: 32px;
+    filter: drop-shadow(2px 4px 8px black);
 }
 
 .pokedex {
@@ -181,8 +183,8 @@ header h1 {
 }
 
 .pokemon-large-card .pokemon-img {
-    width: 200px; 
-    height: 200px;
+    width: 400px; 
+    height: 350px;
     object-fit: contain;
     margin-bottom: 16px;
     filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
@@ -268,6 +270,55 @@ header h1 {
 
 .tab-content.hidden {
     display: none;
+}
+
+#tab-about.tab-content {
+    background-color: ghostwhite;
+    width: 420px;
+    height: 400px;
+    filter: drop-shadow(2px 4px 6px black);
+    padding: 16px;
+    border-radius: 12px;
+    overflow-y: auto;
+}
+
+#tab-stats.tab-content {
+    background-color: ghostwhite;
+    width: 420px;
+    height: 400px;
+    filter: drop-shadow(2px 4px 6px black);
+    padding: 16px;
+    border-radius: 12px;
+    overflow-y: auto;
+}
+
+#tab-evolution.tab-content {
+    background-color: ghostwhite;
+    width: 420px;
+    height: 400px;
+    filter: drop-shadow(2px 4px 6px black);
+    padding: 16px;
+    border-radius: 12px;
+    overflow-y: auto;
+}
+
+#tab-moves.tab-content {
+    background-color: ghostwhite;
+    width: 420px;
+    height: 400px;
+    filter: drop-shadow(2px 4px 6px black);
+    padding: 16px;
+    border-radius: 12px;
+    overflow-y: auto;
+}
+
+#tab-stats .stat-box {
+    background-color: white;
+    border-radius: 8px;
+    padding: 6px 10px;
+    margin: 6px 0;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .pokemon-card.type-normal,
@@ -385,4 +436,145 @@ header h1 {
 }
 .hidden { 
     display: none; 
+}
+
+.pokemon-img-wrapper {
+    position: relative;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pokemon-img-wrapper .pokeball-bg {
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    pointer-events: none; 
+}
+
+.pokemon-img-wrapper .pokeball-bg.small {
+    width: 128px;
+    height: 128px;
+    opacity: 0.2; 
+}
+
+.pokemon-img-wrapper .pokeball-bg.large {
+    width: 300px;
+    height: 300px;
+}
+
+.pokemon-large-card .pokemon-img-wrapper:hover .pokemon-img {
+    transform: scale(1.05);
+}
+
+.pokemon-mini-stats {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.tab-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 6px;
+}
+
+.tab-buttons button {
+    background: none;
+    border: none;
+    color: inherit;
+    font-weight: bold;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: color 0.3s, border-bottom 0.3s;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-buttons button.active {
+    color: #FFD700;
+    border-bottom: 2px solid #FFD700;
+}
+
+.tab-content {
+    min-height: 150px;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.stat-name {
+    width: 90px;
+    font-weight: bold;
+}
+
+.stat-value {
+    width: 35px;
+    text-align: right;
+    margin-right: 8px;
+}
+
+.stat-bar {
+    flex: 1;
+    height: 8px;
+    border-radius: 4px;
+    background: #ddd;
+    overflow: hidden;
+    position: relative;
+}
+
+.stat-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(to right, red, yellow, green);
+    width: 0;
+    transition: width 0.5s ease-in-out;
+}
+
+
+.about-section h4 {
+    margin: 10px 0 4px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 6px 0;
+    gap: 10px;
+}
+
+.stat-bar {
+    flex: 1;
+    height: 10px;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.stat-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
 }
