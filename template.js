@@ -128,3 +128,16 @@ function renderStat(statName, value) {
         </div>
     `;
 }
+
+
+function renderFooter() {
+    return `
+        <footer class="footer">
+            <div class="footer-left">&copy; YEAR Jermaine Jérôme</div>
+            <div class="footer-right">
+                <a href="impressum.html" target="_blank">Impressum</a> | 
+                <a href="datenschutz.html" target="_blank">Datenschutz</a>
+            </div>
+        </footer>
+    `;
+}
