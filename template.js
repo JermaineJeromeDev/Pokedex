@@ -4,9 +4,17 @@ function renderHeader() {
             <img src="assets/img/pokeball.png" alt="Pokéball Logo">
             <h1>Pokédex</h1>
         </div>
-        ${renderSearchBar()}
+        <nav class="nav-links">
+            ${renderSearchBar()}
+        </nav>
+        <div class="burger-menu" id="burgerMenu" aria-label="Open menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     `;
 }
+
 
 function renderSearchBar() {
     return `
@@ -19,9 +27,12 @@ function renderSearchBar() {
                 minlength="3"
             >
             <button type="submit" aria-label="Start search">Search</button>
+            <p id="searchHint" class="search-hint">Enter at least 3 letters</p>
         </form>
     `;
 }
+
+
 
 function renderPokemonCard(pokemon) {
     return `
@@ -47,6 +58,7 @@ function renderPokemonCard(pokemon) {
         </article>
     `;
 }
+
 
 function renderOverlay(pokemon) {
     return `
@@ -103,6 +115,7 @@ function renderOverlay(pokemon) {
         </div>
     `;
 }
+
 
 function renderStat(statName, value) {
     return `
