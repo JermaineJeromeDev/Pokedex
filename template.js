@@ -66,7 +66,6 @@ function renderOverlay(pokemon) {
                             <button class="tab-btn" data-tab="evolution">Evolution</button>
                             <button class="tab-btn" data-tab="moves">Moves</button>
                         </div>
-
                         <div class="tab-content" id="tab-about">
                             <h3>About</h3>
                             <p><strong>Species:</strong> ${pokemon.species.name}</p>
@@ -80,7 +79,6 @@ function renderOverlay(pokemon) {
                             <p><strong>Egg Groups:</strong> Unknown</p>
                             <p><strong>Egg Cycle:</strong> Unknown</p>
                         </div>
-
                         <div class="tab-content hidden" id="tab-stats">
                             <h3>Base Stats</h3>
                             ${pokemon.stats.map(s => `
@@ -94,12 +92,6 @@ function renderOverlay(pokemon) {
                                 </div>
                             `).join('')}
                         </div>
-
-                        <div class="tab-content hidden" id="tab-evolution">
-                            <h3>Evolution</h3>
-                            <p>Evolution data will be loaded here.</p>
-                        </div>
-
                         <div class="tab-content hidden" id="tab-moves">
                             <h3>Moves</h3>
                             ${pokemon.moves.slice(0, 10).map(m => `<p>${m.move.name}</p>`).join('')}
@@ -124,4 +116,3 @@ function renderStat(statName, value) {
         </div>
     `;
 }
-
