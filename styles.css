@@ -699,6 +699,89 @@ header h1 {
   text-decoration: underline;
 }
 
+@media (max-width: 768px) {
+  .overlay-content {
+    width: 80vw;
+    max-width: 80vw;
+    max-height: calc(100vh - 28px);
+    overflow-y: auto;
+  }
+
+  .pokemon-large-card {
+    width: 100%;
+    max-width: none;
+    min-height: auto;
+    padding: 14px 14px 16px;
+  }
+
+  .pokemon-large-card .pokemon-img-wrapper {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pokemon-large-card .pokemon-img {
+    width: min(38vw, 190px);
+    height: auto;
+    max-height: 22vh;
+    margin-bottom: 8px;
+  }
+
+  .pokemon-img-wrapper .pokeball-bg.large {
+    width: 170px;
+    height: 170px;
+  }
+
+  .pokemon-large-card .pokemon-name {
+    font-size: 1.25rem;
+    margin: 8px 0 2px 0;
+  }
+
+  .pokemon-large-card .pokemon-id {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  .pokemon-large-card .pokemon-types {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .pokemon-large-card .pokemon-tabs {
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .pokemon-large-card .tab-btn {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    border-radius: 10px;
+    flex: 1 1 100px;
+    min-width: 100px;
+  }
+
+  .pokemon-large-card .tab-content {
+    margin-top: 8px;
+    max-height: 24vh;
+  }
+
+  #tab-about.tab-content,
+  #tab-stats.tab-content,
+  #tab-evolution.tab-content,
+  #tab-moves.tab-content {
+    width: 100%;
+    height: auto;
+    min-height: 180px;
+    padding: 10px;
+  }
+
+  .overlay .nav-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 1.9rem;
+  }
+}
+
 @media (max-width: 630px) {
   .search-bar {
     flex-direction: column;
